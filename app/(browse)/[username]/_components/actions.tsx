@@ -33,7 +33,7 @@ export const Actions = ({
     }
 
     const onClick = () => {
-        if(isFollowing){
+        if(isFollowing){ 
             handleUnfollow()
         }else{
             handleFollow()
