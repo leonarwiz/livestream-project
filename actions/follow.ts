@@ -29,6 +29,7 @@ export const onUnfollow = async (id: string) => {
         }
         return unfollowedUser
     }catch(error){
+        console.log(error)
         throw new Error("Internal Error")
     }
 }
