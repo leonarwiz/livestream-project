@@ -27,21 +27,6 @@ export default async function ChatPage() {
                 label="Enable chat"
                 value={stream.isChatEnabled}
             />
-            <ToggleCard
-                field="isChatEnabled"
-                label="Enable chat"
-                value={stream.isChatEnabled}
-            />
-            <ToggleCard
-                field="isChatEnabled"
-                label="Enable chat"
-                value={stream.isChatEnabled}
-            />
-            <ToggleCard
-                field="isChatEnabled"
-                label="Enable chat"
-                value={stream.isChatEnabled}
-            />
         </div>
     </div>
   )
