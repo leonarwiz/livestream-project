@@ -65,7 +65,6 @@ html,
 body,
 :root{
   height: 100%;
-  @apply bg-neutral-900/80;
 }
 
 .hidden-scrollbar{
