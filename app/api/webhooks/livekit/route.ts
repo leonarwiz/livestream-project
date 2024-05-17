@@ -39,4 +39,5 @@ export async function POST(req : Request){
             }
         })
     }
+    return new Response("Webhook POST Success", {status: 200})
 }
