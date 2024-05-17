@@ -30,7 +30,9 @@ export const KeyCard = ({
                             disabled
                             placeholder="Stream key"
                         />
-                        <CopyButton/>
+                        <CopyButton
+                            value={value || ""}
+                        />
                     </div>
                 </div>
                 <Button
