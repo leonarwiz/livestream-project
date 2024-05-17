@@ -1,6 +1,5 @@
 import React from 'react'
 
-import { Button } from '@/components/ui/button'
 
 import { UrlCard } from './_components/url-card'
 import { KeyCard } from './_components/key-card'
