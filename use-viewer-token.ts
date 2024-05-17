@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import {JwtPayload, jwtDecode} from 'jwt-decode'
 import { createViewerToken } from './actions/token'
 
-export const useViewerTOken = (hostIdentity: string) => {
+export const useViewerToken = (hostIdentity: string) => {
     const [token, setToken] = useState("")
     const [name, setName] = useState("")
     const [identity, setIdentity] = useState("")
@@ -12,11 +12,13 @@ export const useViewerTOken = (hostIdentity: string) => {
         const createToken = async () => {
             try{
                 const viewerToken = await createViewerToken(hostIdentity)
+                console.log({viewerToken})
                 setToken(viewerToken)
 
                 const decodeToken = jwtDecode(viewerToken) as JwtPayload & {
                     name?: string
                 }
+                const name = decodeToken?.name
                 const identity = decodeToken.jti
                 if(identity){
                     setIdentity(identity)
