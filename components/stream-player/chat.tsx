@@ -8,6 +8,7 @@ import { useMediaQuery } from "usehooks-ts"
 import { ChatHeader } from "./chat-header"
 import { ChatForm } from "./chat-form"
 import { ChatList } from "./chat-list"
+import {ChatCommunity} from './chat-community'
 
 interface ChatProps{
     hostName: string
@@ -85,9 +86,11 @@ export const Chat = ({
                 </>
             )}
             {variant === ChatVariant.COMMUNITY && (
-                <>
-                    <p>Community</p>
-                </>
+                <ChatCommunity
+                    viewerName={viewerName}
+                    hostName={hostName}
+                    isHidden={isHidden}
+                />
             )}
         </div>
     )
