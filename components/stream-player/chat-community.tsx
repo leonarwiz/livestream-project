@@ -1,12 +1,13 @@
 "use client";
 
 import { useParticipants } from "@livekit/components-react";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useDebounceValue } from "usehooks-ts"; 
 
 import {ScrollArea} from "@/components/ui/scroll-area"
 import { Input } from "../ui/input";
 import {CommunityItem} from "./community-item"
+import { LocalParticipant, RemoteParticipant } from "livekit-client";
 interface ChatCommunityProps{
     hostName: string;
     viewerName: string;
@@ -19,12 +20,27 @@ export const ChatCommunity = ({
     isHidden
 }:ChatCommunityProps) => {
     const [value, setValue] = useState("")
-    const debouncedValue = useDebounceValue<string>(value, 500)
+    const [debouncedValue, setDebouncedValue] = useDebounceValue<string>(value, 500)
     const participants = useParticipants()
 
     const onChange = (newValue : string) => {
         setValue(newValue)
+        setDebouncedValue(newValue)
     }
+
+    const filteredParticipants = useMemo(() => {
+        const deduped = participants.reduce((acc, participant) => {
+            const hostAsViewer  = `host-${participant.identity}`
+            if(!acc.some((p) => p.identity === hostAsViewer)){
+                acc.push(participant)
+            }
+            return acc
+        }, [] as (RemoteParticipant | LocalParticipant)[])
+
+        return deduped.filter((participant) => {
+            return participant.name?.toLowerCase().includes(debouncedValue.toLowerCase())
+        })
+    }, [participants, debouncedValue])
     
     if(isHidden){
         return (
@@ -47,7 +63,7 @@ export const ChatCommunity = ({
                 <p className="text-center text-sm text-muted-foreground hidden last:block p-2">
                     No results
                 </p>
-                {participants.map((participant) => (
+                {filteredParticipants.map((participant) => (
                     <CommunityItem
                         key={participant.identity}
                         hostName={hostName}
