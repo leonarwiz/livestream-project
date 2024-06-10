@@ -87,3 +87,11 @@ export const ChatForm = ({
         </form>
     )
 }
+
+export const ChatFormSkeleton = () => {
+    return (
+        <div>
+            Chat Form Skeleton
+        </div>
+    )
+}
